@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:outputText value="Die Vorratsdatenspeicherung"
+			style="font-family: Arial,sans-serif;" />
+		<p:timeline id="timeline" value="#{basicTimelineView.model}"
+			height="800px" selectable="#{basicTimelineView.selectable}"
+			zoomable="#{basicTimelineView.zoomable}"
+			moveable="#{basicTimelineView.moveable}"
+			stackEvents="#{basicTimelineView.stackEvents}"
+			snapEvents="#{basicTimelineView.snapEvents}"
+			axisOnTop="#{basicTimelineView.axisOnTop}"
+			eventStyle="#{basicTimelineView.eventStyle}"
+			showCurrentTime="#{basicTimelineView.showCurrentTime}"
+			showNavigation="#{basicTimelineView.showNavigation}"
+			zoomMax="#{basicTimelineView.zoomMax}"
+			zoomMin="#{basicTimelineView.zoomMin}"
+			eventMargin="#{basicTimelineView.eventMargin}"
+			eventMarginAxis="#{basicTimelineView.eventMarginAxis}"
+			min="#{basicTimelineView.min}" max="#{basicTimelineView.max}"
+			start="#{basicTimelineView.start}" end="#{basicTimelineView.end}"
+			var="story" widgetVar="timelineStoryWdgt">
+			<p:tabView styleClass="#{story.category}">
+				<p:tab title="#{basicTimelineView.getCategoryTitle(story.category)}"
+					titleStyle="#{basicTimelineView.getCategoryColor(story.category)}">
+
+					<p:panelGrid columns="1" layout="grid" style="text-align: left;"
+						styleClass="noborder">
+						<h:outputText
+							value="#{basicTimelineView.wrapStringAfterWhitespaceWithIndex(story.title, 40)}"
+							style="white-space: pre-wrap; font-weight: bold;" />
+						<h:outputText value="#{story.startDate}"
+							style="text-align: left; font-style: italic;" />
+						<h:outputText
+							value="#{basicTimelineView.wrapStringAfterWhitespaceWithIndex(basicTimelineView.trimString(story.text,150), 40)}"
+							style="white-space: pre-wrap" />
+						<p:commandButton value="more" oncomplete="PF('dlg2').show();"
+							action="#{basicTimelineView.setDialogValues}" process="@this"
+							update="@form">
+							<f:param name="date" value="#{story.startDate}" />
+						</p:commandButton>
+
+					</p:panelGrid>
+				</p:tab>
+			</p:tabView>
+
+			<p:ajax event="select" listener="#{basicTimelineView.onSelect}" />
+
+		</p:timeline>
+		<p:chart type="line" model="#{basicTimelineView.dateModel}"
+			style="height:100px;">
+			<p:ajax event="itemSelect"
+				listener="#{basicTimelineView.chartItemSelect}" update="timeline" />
+		</p:chart>
+
+		<p:dialog header="#{basicTimelineView.storyDate}" widgetVar="dlg2"
+			modal="true" width="300" appendToBody="false" id="storyDialog">
+			<p:panelGrid columns="1" layout="grid" style="text-align: left;"
+				styleClass="noborder">
+				<strong><h:outputText
+						value="#{basicTimelineView.storyTitle}" /></strong>
+				<h:outputText value="#{basicTimelineView.storyText}" />
+				<p:link href="#{basicTimelineView.link}" value="Link to Source"
+					target="_blank" rendered="#{basicTimelineView.linkRendered}" />
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+	<style type="text/css">
+.ui-widget {
+	font-size: 10px !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+	border: none !important;
+	padding-top: 0em;
+	padding-right: 0em;
+	padding-bottom: 0em;
+	padding-left: 0em;
+}
+
+.ui-tabs .ui-tabs-nav {
+	background: transparent;
+}
+
+.ui-panelgrid-content .ui-widget-content .ui-grid .ui-grid-responsive {
+	background: white;
+}
+
+.ui-state-default .ui-tabs-selected .ui-state-active .ui-corner-top {
+	background: white;
+}
+
+.ui-widget-content .noborder {
+	border: none !important;
+}
+
+.timeline-event {
+	color: black !important;
+}
+
+.timeline-event-content {
+	padding: 5px;
+	text-shadow: none;
+}
+
+.ui-widget .ui-widget {
+	background-color: transparent;
+	border: none;
+}
+
+.timeline-event.timeline-event-dot {
+	display: none;
+}
+
+.309697>li {
+	background: #FF08FF none !important;
+}
+
+.309700>li {
+	background: #FF08FF none !important;
+}
+
+.309695>li {
+	background: #FF08FF none !important;
+}
+
+.309690>li {
+	background: #FF08FF none !important;
+}
+
+.309687>li {
+	background: #FF08FF none !important;
+}
+
+.309692>li {
+	background: #FF08FF none !important;
+}
+
+.309836>li {
+	background: #FF08FF none !important;
+}
+
+.309698>li {
+	background: #FF08FF none !important;
+}
+
+.309688>li {
+	background: #FF08FF none !important;
+}
+
+.309694>li {
+	background: #FF08FF none !important;
+}
+
+.309686>li {
+	background: #FF08FF none !important;
+}
+
+.309691>li {
+	background: #FF08FF none !important;
+}
+
+.309693>li {
+	background: #FF08FF none !important;
+}
+
+.309696>li {
+	background: #FF08FF none !important;
+}
+
+.309689>li {
+	background: #FF08FF none !important;
+}
+
+.309691>li {
+	background: #FF08FF none !important;
+}
+
+.309668>li {
+	background: #70AEBE none !important;
+}
+
+.309536>li {
+	background: #FFA50A none !important;
+}
+
+.309667>li {
+	background: #1BB3BE none !important;
+}
+
+.309665>.ui-tabs-nav .ui-helper-reset .ui-widget-header .ui-corner-all>.ui-tabs .ui-tabs-nav li a
+	{
+	background: #BACC1D none !important;
+}
+
+.309663>li {
+	background: #0D6EFF none !important;
+}
+
+.309674>li {
+	background: #8DBE96 none !important;
+}
+
+.309667>li {
+	background: #1BB3BE none !important;
+}
+
+.309536>li {
+	background: #FFA50A none !important;
+}
+
+.309665>li {
+	background: #BACC1D none !important;
+}
+
+.309663>li {
+	background: #0D6EFF none !important;
+}
+
+.309674>li {
+	background: #8DBE96 none !important;
+}
+
+.309681>li {
+	background: #ED0000 none !important;
+}
+
+.309680>li {
+	background: #0279BE none !important;
+}
+
+.309664>li {
+	background: #30C702 none !important;
+}
+
+.309669>li {
+	background: #BE6C43 none !important;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited
+	{
+	color: #fff;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited
+	{
+	text-shadow: none;
+}
+</style>
+
+
+</h:body>
+</html>
